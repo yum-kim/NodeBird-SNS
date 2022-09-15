@@ -1,0 +1,14 @@
+{
+  "name": "react-nodebird-front",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "yumiKim",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "next": "^9.5.5"
+  }
+}
