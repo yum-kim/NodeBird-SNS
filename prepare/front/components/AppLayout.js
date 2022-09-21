@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu } from 'antd';
+import { Menu, Input, Row, Col } from 'antd';
 
 const AppLayout = ({ children }) => {
     const items = [
@@ -14,6 +14,10 @@ const AppLayout = ({ children }) => {
             key: 'profile'
         },
         {
+            label: <Input.Search style={{verticalAlign: 'middle'}}/>,
+            key: 'search'
+        },
+        {
             label: <Link href="/signup"><a>회원가입</a></Link>,
             key: 'signup'
         }
@@ -22,7 +26,17 @@ const AppLayout = ({ children }) => {
     return (
         <div>
             <Menu mode="horizontal" items={items} />
-            {children}
+            <Row gutter={8}>
+                <Col xs={24} md={6}>
+                    
+                </Col>
+                <Col xs={24} md={12}>
+                    {children}
+                </Col>
+                <Col xs={24} md={6}>
+                    <a href="https://github.com/yum-kim/NodeBird-SNS" target="_blank" rel="noopener noreferrer">Github</a>
+                </Col>
+            </Row>
         </div>
     )
 }
