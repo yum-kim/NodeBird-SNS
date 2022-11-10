@@ -1,7 +1,7 @@
 //store
 const initialState = {
     user: {
-        inLoggedIn: false,
+        isLoggedIn: false,
         user: null,
         signUpData: {},
         loginData: {},
@@ -54,6 +54,8 @@ const rootReducer = ((state = initialState, action) => {
                 }
             }
         };
+            
+        default: return {...state}
     }
 });
 
