@@ -1,3 +1,5 @@
+import { HYDRATE } from 'next-redux-wrapper';
+
 //store
 const initialState = {
     user: {
@@ -32,7 +34,12 @@ export const logoutAction = (data) => {
  * initialState랑은 객체가 다름 (그래야 prev, next state 둘 다 기록에 남음)
  */
 const rootReducer = ((state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
+        case HYDRATE: {
+            console.log('HYDRATE', action);
+            return { ...state, ...action.payload };
+        }
+            
         case 'LOG_IN': {
             return {
                 ...state,
@@ -44,7 +51,7 @@ const rootReducer = ((state = initialState, action) => {
             }
         };
       
-        case 'LOG_IN': {
+        case 'LOG_OUT': {
             return {
                 ...state,
                 user: {
@@ -55,7 +62,8 @@ const rootReducer = ((state = initialState, action) => {
             }
         };
             
-        default: return {...state}
+        default:
+            return state;
     }
 });
 
