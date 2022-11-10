@@ -12,7 +12,7 @@ const SearchInput = styled(Input.Search)`
 `;
 
 const AppLayout = ({ children }) => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const { isLoggedIn } = useSelector((state) => state.user);
     const items = [
         {
             label: <Link href="/"><a>메인</a></Link>,
