@@ -1,43 +1,12 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import Slick from 'react-slick';
-import styled from 'styled-components';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { Global, Overlay, Header, ImgWrapper, Indicator } from './styles';
 
 const ImagesZoom = ({ images, onClose }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    
-    const Overlay = styled.div`
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 5000;
-        background-color: black;
-        text-align: center;
-    `;
-
-    const Header = styled.header`
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px;
-
-        & h1 {
-            color: white;
-        }
-    `;
-
-    const ImgWrapper = styled.div`
-        padding: 30px;
-
-        & img {
-            max-width: 100%;
-            margin: 0 auto;
-        }
-    `;
 
     return (
         <Overlay>
@@ -62,6 +31,12 @@ const ImagesZoom = ({ images, onClose }) => {
                         ))}
                     </Slick>
                 </div>
+                <Indicator>
+                    {currentSlide + 1}
+                    {' '}
+                    /
+                    {images.length}
+                </Indicator>
             </div>
         </Overlay>
     );
