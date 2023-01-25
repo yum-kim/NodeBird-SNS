@@ -5,7 +5,7 @@ export const initialState = {
             id: 1,
             nickname: '유미',
         },
-        content: '첫 번째 게시글입니당',
+        content: '첫 번째 게시글입니당 #해시태그 ##첫번째 #두번째',
         Images: [{
             src: 'https://asset.programmers.co.kr/image/origin/production/job_theme/163050/4412d7cf-6486-4e3c-9308-c0982b3227d1.jpg'
         }, {
