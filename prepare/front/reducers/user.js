@@ -100,20 +100,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: false,
-                logInError: action.error,
+                logInError: action.error
             }
         case LOG_OUT_REQUEST: 
             return {
                 ...state,
                 logOutLoading: true,
                 logOutDone: false,
-                logOutError: true 
+                logOutError: null 
             }
         case LOG_OUT_SUCCESS: 
             return {
                 ...state,
                 logOutLoading: false,
                 logOutDone: true,
+                logInDone: false,
                 me: null
             }
         case LOG_OUT_FAILURE: 

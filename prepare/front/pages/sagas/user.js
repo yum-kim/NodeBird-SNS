@@ -18,7 +18,7 @@ function* logIn(action) {
         console.log('saga - LOG_IN_REQUEST');
 
         // const result = yield call(logInAPI, action.data);
-        yield delay(2000); //login 서버 구현 전까지 임시 구현
+        yield delay(1000); //login 서버 구현 전까지 임시 구현
 
         yield put({
             type: LOG_IN_SUCCESS,
@@ -41,7 +41,7 @@ function* logIn(action) {
 
 function* logOut(action) {
     try {
-        yield delay(1000);
+        yield delay(500);
         
         yield put({
             type: LOG_OUT_SUCCESS,

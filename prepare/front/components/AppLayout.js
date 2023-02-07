@@ -53,7 +53,7 @@ const AppLayout = ({ children }) => {
             <Menu mode="horizontal" items={items} />
             <Row gutter={8}>
                 <Col xs={24} md={6}>
-                    {logInDone && !logOutDone ? <UserProfile /> : <LoginForm />}
+                    {logInDone ? <UserProfile /> : <LoginForm />}
                 </Col>
                 <Col xs={24} md={12}>
                     {children}
