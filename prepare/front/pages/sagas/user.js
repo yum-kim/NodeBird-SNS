@@ -10,6 +10,8 @@ function* logIn(action) {
     //성공결과는 result.data, 실패결과는 err.response.data에 담겨있음
 
     try {
+        console.log('saga - LOG_IN_REQUEST');
+
         // const result = yield call(logInAPI, action.data);
         yield delay(2000); //login 서버 구현 전까지 임시 구현
 
@@ -32,15 +34,31 @@ function* logIn(action) {
      */
 }
 
+function* logOut(action) {
+    try {
+        yield delay(1000);
+        
+        yield put({
+            type: 'LOG_OUT_SUCCESS',
+            data: err.response.data
+        })
+    } catch (err) {
+        yield put({
+            type: 'LOG_OUT_FAILURE',
+            data: err.response.data
+        })
+    }
+}
+
 //thunk에서는 비동기 action creator를 직접 실행했으나, saga에서는 이벤트 리스너 같은 역할을 함
 function* watchLogIn() {
     yield takeLatest('LOG_IN_REQUEST', logIn);
     //LOG_IN 이라는 action이 실행될 때까지 기다리겠다, 실행되면 logIn 함수를 실행
-    //while로 감싸주어야 무한으로 이벤트 리스너 동작, 원래 한번만 받고 일회성으로 
+    //while로 감싸주어야 무한으로 이벤트 리스너 동작, 원래 한번만 받고 일회성으로 끝나나, takeEvery나 takeLatest로 while 대체 가능
 }
 
 function* watchLogOut() {
-    yield takeLatest('LOG_OUT_REQUEST');    
+    yield takeLatest('LOG_OUT_REQUEST', logOut);
 }
 
 export default function* userSaga() {
