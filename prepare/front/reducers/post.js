@@ -27,7 +27,7 @@ export const initialState = {
     postAdded: false,
 }
 
-const ADD_POST = 'ADD_POST';
+const ADD_POST = 'ADD_POST_REQUEST';
 export const addPost = {
     type: ADD_POST
 }
@@ -47,6 +47,12 @@ const reducer = (state = initialState, action) => {
             ...state,
             mainPosts: [dummyPost, ...state.mainPosts],
             postAdded: true
+        };
+        case 'ADD_POST_SUCCESS': {
+
+        };
+        case 'ADD_POST_FAILURE': {
+            
         };
         default:
             return state;

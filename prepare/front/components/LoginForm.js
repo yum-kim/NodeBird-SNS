@@ -38,7 +38,7 @@ const LoginForm = () => {
                 <Input name="user-password" value={password} onChange={onChangePassword} required />
             </div>
             <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={false} style={{ marginRight: '10px' }}>로그인</Button>
+                <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ marginRight: '10px' }}>로그인</Button>
                 <Link href="/signup"><a><Button>회원가입</Button></a></Link>
             </ButtonWrapper>
         </FormWrapper>

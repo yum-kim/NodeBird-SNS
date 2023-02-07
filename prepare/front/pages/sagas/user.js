@@ -40,7 +40,7 @@ function* logOut(action) {
         
         yield put({
             type: 'LOG_OUT_SUCCESS',
-            data: err.response.data
+            data: action.data
         })
     } catch (err) {
         yield put({

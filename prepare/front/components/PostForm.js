@@ -21,7 +21,7 @@ const PostForm = () => {
     }, []);
 
     return (
-        <Form style={{ margin: '10px 0 20px' }} enctype='multipart/form-data' onFinish={onSubmit}>
+        <Form style={{ margin: '10px 0 20px' }} encType='multipart/form-data' onFinish={onSubmit}>
             <Input.TextArea
                 value={text}
                 onChange={onChangeText}

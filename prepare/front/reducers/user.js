@@ -46,6 +46,8 @@ export const logoutRequestAction = (data) => {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOG_IN_REQUEST': {
+            console.log('reducer - LOG_IN_REQUEST');
+
             return {
                 ...state,
                 isLoggingIn: true
