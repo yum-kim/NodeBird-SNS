@@ -1,6 +1,8 @@
 //store
 export const initialState = {
+    isLoggingIn: false, //로그인 시도중
     isLoggedIn: false,
+    isLoggingOut: false, //로그아웃 시도중
     me: null,
     signUpData: {},
     loginData: {},
@@ -33,20 +35,6 @@ export const loginRequestAction = (data) => {
     }
 };
 
-export const loginSuccessAction = (data) => {
-    return {
-        type: 'LOG_IN_SUCCESS',
-        data,
-    }
-};
-
-export const loginRequestFailure = (data) => {
-    return {
-        type: 'LOG_IN_FAILURE',
-        data,
-    }
-};
-
 export const logoutRequestAction = (data) => {
     return {
         type: 'LOG_OUT_REQUEST',
@@ -57,24 +45,45 @@ export const logoutRequestAction = (data) => {
 //reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOG_OUT_REQUEST': {
-
+        case 'LOG_IN_REQUEST': {
+            return {
+                ...state,
+                isLoggingIn: true
+            }
         };
         case 'LOG_IN_SUCCESS': {
             return {
-                ...state, //안 바꾸고 싶은 데이터 -> spread로 그대로 참조
-                isLoggedIn: true, //바꾸고 싶은 데이터 -> 새로 넣어줌
-                user: action.data
+                ...state,
+                isLoggingIn: false,
+                isLoggedIn: true,
+                me: { ...action.data, nickname: 'yum' }
             }
         };
         case 'LOG_IN_FAILURE': {
-
+            return {
+                ...state,
+                isLoggingIn: false,
+                isLoggedIn: false,
+            }
         }; 
         case 'LOG_OUT_REQUEST': {
             return {
                 ...state,
+                isLoggingOut: true
+            }
+        };
+        case 'LOG_OUT_SUCCESS': {
+            return {
+                ...state,
+                isLoggingOut: false,
                 isLoggedIn: false,
-                user: null
+                me: null
+            }
+        };            
+        case 'LOG_OUT_FAILURE': {
+            return {
+                ...state,
+                isLoggingOut: false,
             }
         };
         default:

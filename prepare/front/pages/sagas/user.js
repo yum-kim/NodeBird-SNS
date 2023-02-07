@@ -15,7 +15,8 @@ function* logIn(action) {
 
         yield put({
             type: 'LOG_IN_SUCCESS',
-            data: result.data
+            // data: result.data
+            data: action.data //login 서버 구현 전까지 임시 구현
         })
     } catch (err) {
         yield put({
