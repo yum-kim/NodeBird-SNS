@@ -27,7 +27,7 @@ const Global = createGlobalStyle`
 `;
 
 const AppLayout = ({ children }) => {
-    const { isLoggedIn } = useSelector((state) => state.user);
+    const { logInDone, logOutDone } = useSelector((state) => state.user);
     const items = [
         {
             label: <Link href="/"><a>메인</a></Link>,
@@ -53,7 +53,7 @@ const AppLayout = ({ children }) => {
             <Menu mode="horizontal" items={items} />
             <Row gutter={8}>
                 <Col xs={24} md={6}>
-                    {isLoggedIn ? <UserProfile /> : <LoginForm />}
+                    {logInDone && !logOutDone ? <UserProfile /> : <LoginForm />}
                 </Col>
                 <Col xs={24} md={12}>
                     {children}
