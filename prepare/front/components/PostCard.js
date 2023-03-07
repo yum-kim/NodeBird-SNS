@@ -3,10 +3,11 @@ import propTypes from 'prop-types';
 import { Content } from 'antd/lib/layout/layout';
 import { Card, Image, Popover, Button, List, Avatar, Comment } from 'antd';
 import { RetweetOutlined, HeartOutlined, MessageOutlined, EllipsisOutlined, HeartTwoTone } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
+import { deletePost } from '../reducers/post';
 
 const PostCard = ({ post }) => {
     const id = useSelector((state) => state.user.me?.id);
@@ -17,7 +18,14 @@ const PostCard = ({ post }) => {
     }, []);
     const onToggleComment = useCallback((prev) => {
         setCommentFormOpend((prev) => !prev);
-    }, [])
+    }, []);
+
+    const { deletePostLoading } = useSelector((state) => state.post);
+    const dispatch = useDispatch();
+
+    const onDeletePost = () => {
+        dispatch(deletePost({ postId: post.id }));
+    }
 
     return (
         <div style={{ marginBottom: 15 }}>
@@ -35,7 +43,7 @@ const PostCard = ({ post }) => {
                                 {id && post.User.id === id ? (
                                     <>
                                         <Button>수정</Button>
-                                        <Button type="danger">삭제</Button>
+                                        <Button type="danger" onClick={onDeletePost} loading={deletePostLoading}>삭제</Button>
                                     </> 
                                 ) : <Button>신고</Button>
                                 }

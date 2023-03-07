@@ -31,7 +31,10 @@ export const initialState = {
     addPostError: null,
     addCommentLoading: false,
     addCommentDone: false,
-    addCommentError: null
+    addCommentError: null,
+    deletePostLoading: false,
+    deletePostDone: false,
+    deletePostError: null,
 }
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -42,6 +45,10 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
+export const DELETE_POST_REQUEST = 'DELETE_POST_REQUEST';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
+export const DELETE_POST_FAILURE = 'DELETE_POST_FAILURE';
+
 export const addPost = (data) => ({
     type: ADD_POST_REQUEST,
     data,
@@ -49,6 +56,11 @@ export const addPost = (data) => ({
 
 export const addComment = (data) => ({
     type: ADD_COMMENT_REQUEST,
+    data,
+});
+
+export const deletePost = (data) => ({
+    type: DELETE_POST_REQUEST,
     data,
 });
 
@@ -122,6 +134,31 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addCommentLoading: false,
                 addCommentError: action.error,
+            }
+        };
+        case DELETE_POST_REQUEST: {
+            return {
+                ...state,
+                deletePostLoading: true,
+                deletePostDone: false,
+                deletePostError: null
+            }
+        }
+        case DELETE_POST_SUCCESS: {
+            const mainPosts = state.mainPosts.filter((v) => v.id !== action.data.postId);
+            
+            return {
+                ...state,
+                mainPosts,
+                deletePostLoading: false,
+                deletePostDone: true,
+            };
+        }
+        case DELETE_POST_FAILURE: {
+            return {
+                ...state,
+                deletePostLoading: false,
+                deletePostError: action.error,
             }
         };
         default:
