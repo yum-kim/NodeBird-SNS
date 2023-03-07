@@ -10,7 +10,7 @@ const PostForm = () => {
         console.log(imageInput.current);
         imageInput.current.click();
     }, [imageInput.current]);
-    const { imagePaths, addPostDone } = useSelector((state) => state.post);
+    const { imagePaths, addPostDone, addPostLoading } = useSelector((state) => state.post);
     const [text, onChangeText, setText] = useInput('');
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const PostForm = () => {
             <div>
                 <input type="file" multiple hidden ref={imageInput} />
                 <Button onClick={onClickImageUpload}>이미지 업로드</Button>
-                <Button type='primary' style={{ float: 'right' }} htmlType='submit'>게시물 올리기</Button>
+                <Button type='primary' style={{ float: 'right' }} htmlType='submit' loading={addPostLoading}>게시물 올리기</Button>
             </div>
             <div>
                 {imagePaths.map((v) => (

@@ -29,7 +29,7 @@ const CommentForm = ({ post }) => {
         <Form onFinish={onSubmitComment} style={{ marginTop: 10 }}>
             <Form.Item>
                 <Input.TextArea value={commentText} onChange={onChangeCommentText} rows={4} />
-                <Button style={{ position: 'absolute', right: 0, bottom: -40 }} type="primary" htmlType="submit" loading={addCommentLoading}>올리기</Button>
+                <Button style={{ position: 'absolute', right: 0, bottom: -40, zIndex: 1 }} type="primary" htmlType="submit" loading={addCommentLoading}>올리기</Button>
             </Form.Item>
         </Form>
     );

@@ -30,12 +30,12 @@ const LoginForm = () => {
             <div>
                 <label htmlFor="user-email">이메일</label>
                 <br />
-                <Input name="user-email" value={email} onChange={onChangeEmail} required />
+                <Input type="email" name="user-email" value={email} onChange={onChangeEmail} required />
             </div>
             <div style={{marginTop: '10px'}}>
                 <label htmlFor="user-password">비밀번호</label>
                 <br />
-                <Input name="user-password" value={password} onChange={onChangePassword} required />
+                <Input type="password" name="user-password" value={password} onChange={onChangePassword} required />
             </div>
             <ButtonWrapper>
                 <Button type="primary" htmlType="submit" loading={logInLoading} style={{ marginRight: '10px' }}>로그인</Button>
