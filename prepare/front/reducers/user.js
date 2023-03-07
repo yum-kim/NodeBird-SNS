@@ -9,6 +9,9 @@ export const initialState = {
     signUpLoading: false, 
     signUpDone: false,
     signUpError: null,
+    changeNicknameLoading: false,
+    changeNicknameDone: false,
+    changeNicknameError: null,
     me: null,
     signUpData: {},
     loginData: {},
@@ -50,6 +53,14 @@ export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
+export const CHANGE_NICKNAME_REQUEST = 'CHANGE_NICKNAME_REQUEST';
+export const CHANGE_NICKNAME_SUCCESS = 'CHANGE_NICKNAME_SUCCESS';
+export const CHANGE_NICKNAME_FAILURE = 'CHANGE_NICKNAME_FAILURE';
+
+export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
+
+
 /**
  * action
  * 원칙적으로 Login에는 request-success-failure 3단계가 있음
@@ -68,20 +79,26 @@ export const logoutRequestAction = (data) => {
     }
 };
 
+export const signupRequestAction = (data) => {
+    return {
+        type: SIGN_UP_REQUEST,
+        data,
+    }
+}
+
 const dummyUser = (data) => ({
-    ...data,
     nickname: 'yum',
     id: 1,
-    Posts: [],
-    Followers: [],
-    Followings: []
+    Posts: [{id: 1}],
+    Followers: [{id: 1, nickname: '유미'}],
+    Followings: [],
+    ...data
 });
 
 //reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOG_IN_REQUEST: 
-            console.log('reducer - LOG_IN_REQUEST');
             return {
                 ...state,
                 logInLoading: true,
@@ -136,6 +153,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signUpLoading: false,
                 signUpDone: true,
+                me: dummyUser(action.data)
             }
         case SIGN_UP_FAILURE: 
             return {
@@ -144,6 +162,25 @@ const reducer = (state = initialState, action) => {
                 signUpDone: false,
                 signUpError: action.error
             }
+        case ADD_POST_TO_ME:
+            return {
+                ...state,
+                me: {
+                    ...state.me,
+                    Posts: [{ id: action.data }, ...state.me.Posts],
+                }
+            };
+        case REMOVE_POST_OF_ME: {
+            const Posts = state.me.Posts.filter((v) => v.id !== action.data.postId);
+            
+            return {
+                ...state,
+                me: {
+                    ...state.me,
+                    Posts,
+                }
+            };
+        }
         default:
             return state;
     }
