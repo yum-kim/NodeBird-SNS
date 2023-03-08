@@ -12,6 +12,7 @@
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.23.2",
     "axios": "^1.2.6",
+    "faker": "^4.1.0",
     "immer": "^9.0.19",
     "next": "^9.5.5",
     "next-redux-wrapper": "^8.0.0",
