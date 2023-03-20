@@ -8,6 +8,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import { deletePost } from '../reducers/post';
+import FollowButton from './FollowButton';
 
 const PostCard = ({ post }) => {
     const id = useSelector((state) => state.user.me?.id);
@@ -52,6 +53,7 @@ const PostCard = ({ post }) => {
                         <EllipsisOutlined />
                         </Popover>
                 ]}
+                extra={id && <FollowButton post={post} />}
             >
                 <Card.Meta
                     avatar={<Avatar>{post.User.nickname[0]}</Avatar>}

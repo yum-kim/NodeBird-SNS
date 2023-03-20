@@ -3,7 +3,9 @@ import axios from 'axios';
 import {
     LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
     LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
-    SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE
+    SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
+    FOLLOW_REQUEST, FOLLOW_SUCCESS, FOLLOW_FAILURE,
+    UNFOLLOW_SUCCESS, UNFOLLOW_FAILURE, UNFOLLOW_REQUEST
 } from '../../reducers/user';
 
 function logInAPI(data) {
@@ -71,6 +73,49 @@ function* signUp(action) {
     }
 }
 
+function followAPI(data) {
+    return axios.post('/api/follow', data);
+}
+
+function* follow(action) {
+    try {
+        // const result = yield call(followAPI, action.data);
+
+        yield delay(1000);
+        
+        yield put({
+            type: FOLLOW_SUCCESS,
+            data: action.data
+        })
+    } catch (err) {
+        yield put({
+            type: FOLLOW_FAILURE,
+            data: err.response.data
+        })
+    }
+}
+
+function unfollowAPI(data) {
+    return axios.post('/api/unfollow', data);
+}
+
+function* unfollow(action) {
+    try {
+        // const result = yield call(unfollowAPI, action.data);
+        yield delay(1000);
+        
+        yield put({
+            type: UNFOLLOW_SUCCESS,
+            data: action.data
+        })
+    } catch (err) {
+        yield put({
+            type: UNFOLLOW_FAILURE,
+            data: err.response.data
+        })
+    }
+}
+
 //thunk에서는 비동기 action creator를 직접 실행했으나, saga에서는 이벤트 리스너 같은 역할을 함
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
@@ -86,10 +131,21 @@ function* watchSignUp() {
     yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
+function* watchFollow() {
+    yield takeLatest(FOLLOW_REQUEST, follow);
+}
+
+function* watchUnfollow() {
+    yield takeLatest(UNFOLLOW_REQUEST, unfollow);
+}
+
+
 export default function* userSaga() {
     yield all([
         fork(watchLogIn),
         fork(watchLogOut),
         fork(watchSignUp),
+        fork(watchFollow),
+        fork(watchUnfollow),
     ])
 }
